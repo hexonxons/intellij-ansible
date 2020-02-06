@@ -9,16 +9,17 @@ import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.indexing.FileBasedIndex;
-import lv.kid.vermut.intellij.yaml.file.YamlFileType;
-import lv.kid.vermut.intellij.yaml.psi.NeonFile;
-import lv.kid.vermut.intellij.yaml.psi.NeonKey;
-import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
-import lv.kid.vermut.intellij.yaml.psi.NeonValue;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
+
+import lv.kid.vermut.intellij.yaml.file.YamlFileType;
+import lv.kid.vermut.intellij.yaml.psi.NeonFile;
+import lv.kid.vermut.intellij.yaml.psi.NeonKey;
+import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
+import lv.kid.vermut.intellij.yaml.psi.NeonValue;
 
 /**
  * Created by Vermut on 16/05/2015.
@@ -43,7 +44,6 @@ public class AnsibleUtil {
 
     public static List<NeonKeyValPair> findAllProperties(Project project) {
         return searchKeyPairs(project, null, null);
-
     }
 
     public static List<NeonKey> findAllProperties(Project project, String key) {
@@ -75,8 +75,9 @@ public class AnsibleUtil {
                     GlobalSearchScope.allScope(project));
             for (VirtualFile virtualFile : virtualFiles) {
                 if (virtualFile.getCanonicalPath() != null &&
-                        virtualFile.getCanonicalPath().matches(".*" + pattern))
+                        virtualFile.getCanonicalPath().matches(".*" + pattern)) {
                     result.add(PsiManager.getInstance(project).findFile(virtualFile));
+                }
             }
 
             // Include .j2 - plaintexts
@@ -84,8 +85,9 @@ public class AnsibleUtil {
                     GlobalSearchScope.allScope(project));
             for (VirtualFile virtualFile : virtualFiles) {
                 if (virtualFile.getCanonicalPath() != null &&
-                        virtualFile.getCanonicalPath().matches(".*" + pattern))
+                        virtualFile.getCanonicalPath().matches(".*" + pattern)) {
                     result.add(PsiManager.getInstance(project).findFile(virtualFile));
+                }
             }
         } catch (PatternSyntaxException ignored) {
 
@@ -107,10 +109,11 @@ public class AnsibleUtil {
                     } else {
                         for (NeonKeyValPair property : properties) {
                             if (key.equals(property.getKeyText())) {
-                                if (value == null)
+                                if (value == null) {
                                     result.add(property);
-                                else if (value.equals(property.getValueText()))
+                                } else if (value.equals(property.getValueText())) {
                                     result.add(property);
+                                }
                             }
                         }
                     }

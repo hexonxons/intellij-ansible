@@ -4,20 +4,27 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
-import lv.kid.vermut.intellij.yaml.YamlIcons;
-import lv.kid.vermut.intellij.yaml.psi.NeonKey;
-import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.PsiReferenceBase;
+import com.intellij.psi.ResolveResult;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lv.kid.vermut.intellij.yaml.YamlIcons;
+import lv.kid.vermut.intellij.yaml.psi.NeonKey;
+import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
+
 /**
  * Created by Pavels.Veretennikovs on 2015.05.19..
  */
 public class AnsibleVariableReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference {
-    private String key;
+    private final String key;
 
     public AnsibleVariableReference(PsiElement element, TextRange rangeInElement) {
         super(element, rangeInElement);
@@ -28,7 +35,7 @@ public class AnsibleVariableReference extends PsiReferenceBase<PsiElement> imple
     @Override
     public ResolveResult[] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
-        final List<NeonKey> properties = AnsibleUtil.findAllProperties(project, key);
+        List<NeonKey> properties = AnsibleUtil.findAllProperties(project, key);
         List<ResolveResult> results = new ArrayList<ResolveResult>();
         for (NeonKey property : properties) {
             results.add(new PsiElementResolveResult(property));
@@ -47,14 +54,14 @@ public class AnsibleVariableReference extends PsiReferenceBase<PsiElement> imple
     @Override
     public Object[] getVariants() {
         Project project = myElement.getProject();
-        final List<NeonKeyValPair> properties = AnsibleUtil.findAllProperties(project);
+        List<NeonKeyValPair> properties = AnsibleUtil.findAllProperties(project);
         List<LookupElement> variants = new ArrayList<LookupElement>();
-        for (final NeonKeyValPair property : properties) {
+        for (NeonKeyValPair property : properties) {
             if (property.getKey() != null && property.getKeyText().length() > 0) {
                 variants.add(LookupElementBuilder.create(property).
-                        withIcon(YamlIcons.FILETYPE_ICON).
+                                withIcon(YamlIcons.FILETYPE_ICON).
                                 withTypeText(property.getContainingFile().getName())
-                );
+                            );
             }
         }
         return variants.toArray();

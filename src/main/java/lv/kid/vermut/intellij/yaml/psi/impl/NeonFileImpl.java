@@ -8,17 +8,20 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.tree.TokenSet;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+
+import javax.swing.Icon;
+
 import lv.kid.vermut.intellij.yaml.YamlLanguage;
 import lv.kid.vermut.intellij.yaml.editor.NeonStructureViewElement;
 import lv.kid.vermut.intellij.yaml.file.YamlFileType;
 import lv.kid.vermut.intellij.yaml.parser.NeonElementTypes;
 import lv.kid.vermut.intellij.yaml.psi.NeonFile;
 import lv.kid.vermut.intellij.yaml.psi.NeonSection;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.util.HashMap;
 
 public class NeonFileImpl extends PsiFileBase implements NeonFile {
     public NeonFileImpl(FileViewProvider viewProvider) {
@@ -32,10 +35,6 @@ public class NeonFileImpl extends PsiFileBase implements NeonFile {
     }
 
     @Override
-    public String toString() {
-        return "NeonFile:" + getName();
-    }
-
     public HashMap<String, NeonSection> getSections() {
         HashMap<String, NeonSection> ret = new HashMap<String, NeonSection>();
 
@@ -56,7 +55,8 @@ public class NeonFileImpl extends PsiFileBase implements NeonFile {
     @Override
     public ItemPresentation getPresentation() {
         if (getVirtualFile().getCanonicalPath().endsWith("tasks/main.yml"))
-            // Format role differently
+        // Format role differently
+        {
             return new ItemPresentation() {
                 @Nullable
                 @Override
@@ -69,7 +69,7 @@ public class NeonFileImpl extends PsiFileBase implements NeonFile {
                 public String getLocationString() {
                     return "(" + getParent().getParent().getParent().getParent().getName() + "/" +
                             getParent().getParent().getParent().getName()
-                             + ")";
+                            + ")";
                 }
 
                 @Nullable
@@ -78,7 +78,13 @@ public class NeonFileImpl extends PsiFileBase implements NeonFile {
                     return null;
                 }
             };
-        else
+        } else {
             return new NeonStructureViewElement(this);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "NeonFile:" + getName();
     }
 }

@@ -5,37 +5,40 @@ import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings.IndentOptions;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
-import lv.kid.vermut.intellij.yaml.YamlLanguage;
+
 import org.jetbrains.annotations.NotNull;
+
+import lv.kid.vermut.intellij.yaml.YamlLanguage;
 
 /**
  * Code style settings (tabs etc)
  */
-public class YamlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider
-{
-	public CommonCodeStyleSettings getDefaultCommonSettings()
-	{
-		CommonCodeStyleSettings defaultSettings = new CommonCodeStyleSettings(YamlLanguage.INSTANCE);
-		IndentOptions indentOptions = defaultSettings.initIndentOptions();
-		indentOptions.INDENT_SIZE = 2;
-		indentOptions.TAB_SIZE = 2;
-		indentOptions.USE_TAB_CHARACTER = false;
-		indentOptions.SMART_TABS = false;
+public class YamlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
+    @Override
+    public String getCodeSample(@NotNull SettingsType settingsType) {
+        return "product:\n  name: Yaml\n  version: 4\n  vendor: vermut@kid.lv\n  url: \"https://github.com/vermut/intellij-ansible/\"";
+    }
 
-		return defaultSettings;
-	}
+    @Override
+    public CommonCodeStyleSettings getDefaultCommonSettings() {
+        CommonCodeStyleSettings defaultSettings = new CommonCodeStyleSettings(YamlLanguage.INSTANCE);
+        IndentOptions indentOptions = defaultSettings.initIndentOptions();
+        indentOptions.INDENT_SIZE = 2;
+        indentOptions.TAB_SIZE = 2;
+        indentOptions.USE_TAB_CHARACTER = false;
+        indentOptions.SMART_TABS = false;
 
-	public IndentOptionsEditor getIndentOptionsEditor()
-	{
-		return new IndentOptionsEditor();
-	}
+        return defaultSettings;
+    }
 
-	@NotNull
-	public Language getLanguage() {
-		return YamlLanguage.INSTANCE;
-	}
+    @Override
+    @NotNull
+    public Language getLanguage() {
+        return YamlLanguage.INSTANCE;
+    }
 
-	public String getCodeSample(@NotNull SettingsType settingsType) {
-		return "product:\n  name: Yaml\n  version: 4\n  vendor: vermut@kid.lv\n  url: \"https://github.com/vermut/intellij-ansible/\"";
-	}
+    @Override
+    public IndentOptionsEditor getIndentOptionsEditor() {
+        return new IndentOptionsEditor();
+    }
 }

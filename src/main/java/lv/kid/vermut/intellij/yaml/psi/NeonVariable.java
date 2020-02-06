@@ -5,5 +5,5 @@ package lv.kid.vermut.intellij.yaml.psi;
  * TODO: for future version
  */
 public interface NeonVariable extends NeonValue {
-	String getVariableText();
+    String getVariableText();
 }

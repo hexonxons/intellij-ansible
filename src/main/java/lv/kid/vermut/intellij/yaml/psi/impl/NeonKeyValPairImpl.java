@@ -4,13 +4,15 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.IncorrectOperationException;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+
 import lv.kid.vermut.intellij.yaml.parser.NeonElementTypes;
 import lv.kid.vermut.intellij.yaml.psi.NeonKey;
 import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
 import lv.kid.vermut.intellij.yaml.psi.NeonScalar;
 import lv.kid.vermut.intellij.yaml.psi.NeonValue;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -24,10 +26,9 @@ public class NeonKeyValPairImpl extends NeonPsiElementImpl implements NeonKeyVal
         return "Yaml key-val pair";
     }
 
-
     @Override
     public NeonKey getKey() {
-        ASTNode keys[];
+        ASTNode[] keys;
 
         ASTNode[] compoundKeys = getNode().getChildren(TokenSet.create(NeonElementTypes.COMPOUND_KEY));
         if (compoundKeys.length > 0) {
@@ -41,23 +42,25 @@ public class NeonKeyValPairImpl extends NeonPsiElementImpl implements NeonKeyVal
 
     @Override
     public String getKeyText() {
-        return this.getKey() != null ? this.getKey().getText() : null;
+        return getKey() != null ? getKey().getText() : null;
     }
 
     @Override
     public NeonValue getValue() {
-        if (getNode().getLastChildNode().getPsi() instanceof NeonValue)
+        if (getNode().getLastChildNode().getPsi() instanceof NeonValue) {
             return (NeonValue) getNode().getLastChildNode().getPsi();
+        }
 
         return null;
     }
 
     @Override
     public String getValueText() {
-        if (getValue() instanceof NeonScalar)
+        if (getValue() instanceof NeonScalar) {
             return getValue().getText();
-        else
+        } else {
             return "?? complex value ??";
+        }
     }
 
     @Override

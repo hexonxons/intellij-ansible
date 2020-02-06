@@ -5,15 +5,15 @@
 - name: ensure packages are installed
   action: apt pkg={{ item }}
   with_items:
-      - nodejs
-      - ruby
-      - rubygems
+    - nodejs
+    - ruby
+    - rubygems
 
 - name: install gems for asset compilation
   gem: name={{ item }} state=present user_install=no
   with_items:
-      - sass
-      - compass
+    - sass
+    - compass
 
 - name: install grunt for asset compilation
   npm: name=grunt-cli version=0.1.13 global=yes state=present

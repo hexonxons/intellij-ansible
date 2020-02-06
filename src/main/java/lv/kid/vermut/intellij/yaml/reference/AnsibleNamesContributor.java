@@ -5,12 +5,14 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ArrayUtil;
-import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
-import lv.kid.vermut.intellij.yaml.psi.NeonValue;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
+import lv.kid.vermut.intellij.yaml.psi.NeonValue;
 
 /**
  * Created by Pavels.Veretennikovs on 2015.05.18..

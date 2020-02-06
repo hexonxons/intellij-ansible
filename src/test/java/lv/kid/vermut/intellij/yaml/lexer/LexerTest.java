@@ -7,13 +7,27 @@ import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.UsefulTestCase;
 import com.sun.tools.javac.util.Pair;
+
 import org.jetbrains.annotations.NonNls;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 
-import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.*;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_ASSIGNMENT;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_COLON;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_HEADER;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_INDENT;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_ITEM_DELIMITER;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_LBRACE_CURLY;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_LBRACE_JINJA;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_LINE_CONTINUATION;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_LITERAL;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_RBRACE_CURLY;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_RBRACE_JINJA;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_STRING;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_TAG;
+import static lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes.NEON_WHITESPACE;
 
 /**
  *
@@ -42,7 +56,9 @@ public class LexerTest extends UsefulTestCase {
         lexer.start(text);
         int idx = 0;
         while (lexer.getTokenType() != null) {
-            if (idx >= expectedTokens.length) fail("Too many tokens from lexer; unexpected " + lexer.getTokenType());
+            if (idx >= expectedTokens.length) {
+                fail("Too many tokens from lexer; unexpected " + lexer.getTokenType());
+            }
 
             Pair expected = expectedTokens[idx++];
 
@@ -53,10 +69,17 @@ public class LexerTest extends UsefulTestCase {
             lexer.advance();
         }
 
-        if (idx < expectedTokens.length)
+        if (idx < expectedTokens.length) {
             fail("Not enough tokens from lexer, expected " + expectedTokens.length + " but got only " + idx);
+        }
     }
 
+    private static String doLoadFile(String myFullDataPath, String name) throws IOException {
+        String fullName = myFullDataPath + File.separatorChar + name;
+        String text = FileUtil.loadFile(new File(fullName), CharsetToolkit.UTF8);
+        text = StringUtil.convertLineSeparators(text);
+        return text;
+    }
 
     /***
      * tests here
@@ -65,7 +88,7 @@ public class LexerTest extends UsefulTestCase {
     public void testSimpleYaml() throws Exception {
         doTest("%YAML 1.2\n" +
                 "---\n\n" +
-                "name: 'Jan'", new Pair[]{
+                "name: 'Jan'", new Pair[] {
                 Pair.of(NEON_TAG, "%YAML 1.2"),
                 Pair.of(NEON_INDENT, "\n"),
                 Pair.of(NEON_HEADER, "---"),
@@ -80,7 +103,7 @@ public class LexerTest extends UsefulTestCase {
 
     @Test
     public void testStringWithEqualSign() throws Exception {
-        doTest("name: a == b", new Pair[]{
+        doTest("name: a == b", new Pair[] {
                 Pair.of(NEON_LITERAL, "name"),
                 Pair.of(NEON_COLON, ":"),
                 Pair.of(NEON_WHITESPACE, " "),
@@ -90,7 +113,7 @@ public class LexerTest extends UsefulTestCase {
 
     @Test
     public void testStringWithCurly() throws Exception {
-        doTest("name: {ansible: var }", new Pair[]{
+        doTest("name: {ansible: var }", new Pair[] {
                 Pair.of(NEON_LITERAL, "name"),
                 Pair.of(NEON_COLON, ":"),
                 Pair.of(NEON_WHITESPACE, " "),
@@ -107,7 +130,7 @@ public class LexerTest extends UsefulTestCase {
     @Test
     public void testContinuation() throws Exception {
         doTest("name: >\n" +
-                "   var", new Pair[]{
+                "   var", new Pair[] {
                 Pair.of(NEON_LITERAL, "name"),
                 Pair.of(NEON_COLON, ":"),
                 Pair.of(NEON_WHITESPACE, " "),
@@ -119,7 +142,7 @@ public class LexerTest extends UsefulTestCase {
 
     @Test
     public void testStringWithJinjaVars() throws Exception {
-        doTest("name: some text {{ var1 }} \"{{ var2 }} \\\" {{var3}}\"", new Pair[]{
+        doTest("name: some text {{ var1 }} \"{{ var2 }} \\\" {{var3}}\"", new Pair[] {
                 Pair.of(NEON_LITERAL, "name"),
                 Pair.of(NEON_COLON, ":"),
                 Pair.of(NEON_WHITESPACE, " "),
@@ -148,7 +171,7 @@ public class LexerTest extends UsefulTestCase {
     }
 
     public void testArrayWithJinjaVars() throws Exception {
-        doTest("name: {foo: \"bar\",ansible: \"{{ var2 }} \\\" {{var3}}\" }", new Pair[]{
+        doTest("name: {foo: \"bar\",ansible: \"{{ var2 }} \\\" {{var3}}\" }", new Pair[] {
                 Pair.of(NEON_LITERAL, "name"),
                 Pair.of(NEON_COLON, ":"),
                 Pair.of(NEON_WHITESPACE, " "),
@@ -180,7 +203,7 @@ public class LexerTest extends UsefulTestCase {
     }
 
     public void testStringWithMultiAssigments() throws Exception {
-        doTest("name: foo=baz var={{ value + 2 }} msg=text with {{ data }}", new Pair[]{
+        doTest("name: foo=baz var={{ value + 2 }} msg=text with {{ data }}", new Pair[] {
                 Pair.of(NEON_LITERAL, "name"),
                 Pair.of(NEON_COLON, ":"),
                 Pair.of(NEON_WHITESPACE, " "),
@@ -209,7 +232,7 @@ public class LexerTest extends UsefulTestCase {
     }
 
     public void testStringWithJinjaVars2() throws Exception {
-        doTest("name: key=\"pref-{{ var }}\" key2=\"pref-{{var}}\"", new Pair[]{
+        doTest("name: key=\"pref-{{ var }}\" key2=\"pref-{{var}}\"", new Pair[] {
                 Pair.of(NEON_LITERAL, "name"),
                 Pair.of(NEON_COLON, ":"),
                 Pair.of(NEON_WHITESPACE, " "),
@@ -230,10 +253,9 @@ public class LexerTest extends UsefulTestCase {
         });
     }
 
-
     @Test
     public void testSimple() throws Exception {
-        doTest("name: 'Jan'", new Pair[]{
+        doTest("name: 'Jan'", new Pair[] {
                 Pair.of(NEON_LITERAL, "name"),
                 Pair.of(NEON_COLON, ":"),
                 Pair.of(NEON_WHITESPACE, " "),
@@ -243,7 +265,7 @@ public class LexerTest extends UsefulTestCase {
 
     @Test
     public void testTabAfterKey() throws Exception {
-        doTest("name: \t'Jan'\nsurname:\t \t 'Dolecek'", new Pair[]{
+        doTest("name: \t'Jan'\nsurname:\t \t 'Dolecek'", new Pair[] {
                 Pair.of(NEON_LITERAL, "name"),
                 Pair.of(NEON_COLON, ":"),
                 Pair.of(NEON_WHITESPACE, " \t"),
@@ -306,7 +328,6 @@ public class LexerTest extends UsefulTestCase {
         doTestFromFile();
     }
 
-
     public void doTestFromFile() throws Exception {
         String code = doLoadFile("src/test/data/parser", getTestName(false) + ".yml");
 
@@ -320,18 +341,10 @@ public class LexerTest extends UsefulTestCase {
             lexer.advance();
         }
 
-//		System.out.println(sb);
+        //		System.out.println(sb);
 
         // Match to original
         String lexed = doLoadFile("src/test/data/parser", getTestName(false) + ".lexed");
         assertEquals(lexed, sb.toString());
     }
-
-    private static String doLoadFile(String myFullDataPath, String name) throws IOException {
-        String fullName = myFullDataPath + File.separatorChar + name;
-        String text = FileUtil.loadFile(new File(fullName), CharsetToolkit.UTF8);
-        text = StringUtil.convertLineSeparators(text);
-        return text;
-    }
-
 }

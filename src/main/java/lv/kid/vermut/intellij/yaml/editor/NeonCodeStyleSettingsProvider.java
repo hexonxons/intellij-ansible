@@ -7,9 +7,11 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsProvider;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
-import lv.kid.vermut.intellij.yaml.YamlLanguage;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import lv.kid.vermut.intellij.yaml.YamlLanguage;
 
 /**
  *
@@ -37,6 +39,11 @@ public class NeonCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
         };
     }
 
+    @Override
+    public String getConfigurableDisplayName() {
+        return YamlLanguage.INSTANCE.getDisplayName();
+    }
+
     private static class SimpleCodeStyleMainPanel extends TabbedLanguageCodeStylePanel {
         public SimpleCodeStyleMainPanel(CodeStyleSettings currentSettings, CodeStyleSettings settings) {
             super(YamlLanguage.INSTANCE, currentSettings, settings);
@@ -47,11 +54,6 @@ public class NeonCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
         public AnsibleCodeStyleSettings(CodeStyleSettings settings) {
             super("AnsibleCodeStyleSettings", settings);
         }
-    }
-
-    @Override
-    public String getConfigurableDisplayName() {
-        return YamlLanguage.INSTANCE.getDisplayName();
     }
 }
 

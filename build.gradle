@@ -1,29 +1,20 @@
-import org.gradle.internal.jvm.Jvm
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
-
 plugins {
-    id "org.jetbrains.intellij" version "0.2.11"
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.16'
 }
 
-apply plugin: 'idea'
-apply plugin: 'org.jetbrains.intellij'
-apply plugin: 'java'
-sourceCompatibility = 1.6
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.12'
+repositories {
+    mavenCentral()
 }
+
+sourceCompatibility = 1.8
 
 intellij {
     pluginName 'intellij-ansible'
     updateSinceUntilBuild false
-    type "IC"
-    version '14.1.2'
+    type "PY"
+//    version '14.1.2'
+    plugins "yaml"
 }
 
 group 'lv.kid.vermut.intellij'
@@ -33,18 +24,11 @@ patchPluginXml {
     version project['version']
 }
 
-publishPlugin {
-    apply from: "jetbrains.account"
-}
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
+/*dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile files(Jvm.current().toolsJar)
-}
+}*/
 
 // To make IDEA classes available in editor
 configurations {

@@ -1,70 +1,71 @@
 package lv.kid.vermut.intellij.yaml.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import lv.kid.vermut.intellij.yaml.psi.NeonArray;
-import lv.kid.vermut.intellij.yaml.psi.NeonKey;
-import lv.kid.vermut.intellij.yaml.psi.NeonValue;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import lv.kid.vermut.intellij.yaml.psi.NeonArray;
+import lv.kid.vermut.intellij.yaml.psi.NeonKey;
+import lv.kid.vermut.intellij.yaml.psi.NeonValue;
+
 /**
  *
  */
 public class NeonArrayImpl extends NeonPsiElementImpl implements NeonArray {
-	public NeonArrayImpl(@NotNull ASTNode astNode) {
-		super(astNode);
-	}
+    public NeonArrayImpl(@NotNull ASTNode astNode) {
+        super(astNode);
+    }
 
-	public String toString() {
-		return "Yaml array";
-	}
+    public String toString() {
+        return "Yaml array";
+    }
 
-	@Override
-	public boolean isList() {
-		boolean isList = true;
+    @Override
+    public boolean isList() {
+        boolean isList = true;
 
-		// TODO
+        // TODO
 
-		return isList;
-	}
+        return isList;
+    }
 
-	@Override
-	public boolean isHashMap() {
-		boolean isHashMap = true;
+    @Override
+    public boolean isHashMap() {
+        boolean isHashMap = true;
 
-		// TODO
+        // TODO
 
-		return isHashMap;
-	}
+        return isHashMap;
+    }
 
-	@Override
-	public List<NeonValue> getValues() {
-		ArrayList<NeonValue> result = new ArrayList<NeonValue>();
+    @Override
+    public List<NeonValue> getValues() {
+        ArrayList<NeonValue> result = new ArrayList<NeonValue>();
 
-		// TODO
+        // TODO
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public List<NeonKey> getKeys() {
-		ArrayList<NeonKey> result = new ArrayList<NeonKey>();
+    @Override
+    public List<NeonKey> getKeys() {
+        ArrayList<NeonKey> result = new ArrayList<NeonKey>();
 
-		// TODO
+        // TODO
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public HashMap<String, NeonValue> getMap() {
-		HashMap<String, NeonValue> result = new HashMap<String, NeonValue>();
+    @Override
+    public HashMap<String, NeonValue> getMap() {
+        HashMap<String, NeonValue> result = new HashMap<String, NeonValue>();
 
-		// TODO
+        // TODO
 
-		return result;
-	}
-
+        return result;
+    }
 }

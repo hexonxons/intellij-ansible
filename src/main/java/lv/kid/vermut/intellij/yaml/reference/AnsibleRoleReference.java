@@ -3,7 +3,13 @@ package lv.kid.vermut.intellij.yaml.reference;
 import com.intellij.codeInsight.completion.CompletionUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.PsiReferenceBase;
+import com.intellij.psi.ResolveResult;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,15 +27,16 @@ public class AnsibleRoleReference extends PsiReferenceBase<PsiElement> implement
         key = element.getText(); // .substring(rangeInElement.getStartOffset(), rangeInElement.getEndOffset());
 
         // It should work another way, but I can't figure out how and why
-        if (key.endsWith(CompletionUtilCore.DUMMY_IDENTIFIER_TRIMMED))
+        if (key.endsWith(CompletionUtilCore.DUMMY_IDENTIFIER_TRIMMED)) {
             key = key.substring(0, key.length() - CompletionUtilCore.DUMMY_IDENTIFIER_TRIMMED.length());
+        }
     }
 
     @NotNull
     @Override
     public ResolveResult[] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
-        final List<PsiFile> properties = AnsibleUtil.findRoles(project, key);
+        List<PsiFile> properties = AnsibleUtil.findRoles(project, key);
         List<ResolveResult> results = new ArrayList<ResolveResult>();
         for (PsiFile property : properties) {
             results.add(new PsiElementResolveResult(property));

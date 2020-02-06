@@ -4,6 +4,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.util.ProcessingContext;
+
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -20,14 +21,14 @@ import com.jetbrains.php.lang.psi.elements.PhpNamedElement;
  */
 public class ClassCompletionProvider extends CompletionProvider<CompletionParameters> {
 
-	public ClassCompletionProvider() {
-		super();
-	}
+    public ClassCompletionProvider() {
+        super();
+    }
 
-	@Override
-	protected void addCompletions(@NotNull CompletionParameters params,
-	                              ProcessingContext ctx,
-	                              @NotNull CompletionResultSet results) {
+    @Override
+    protected void addCompletions(@NotNull CompletionParameters params,
+            ProcessingContext ctx,
+            @NotNull CompletionResultSet results) {
 	/*	Collection<PhpNamedElement> variants = new THashSet<PhpNamedElement>();
 
 		PsiElement curr = params.getPosition().getOriginalElement();
@@ -49,6 +50,5 @@ public class ClassCompletionProvider extends CompletionProvider<CompletionParame
 
 			results.addElement(lookupItem);
 		}*/
-	}
-
+    }
 }

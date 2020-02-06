@@ -1,5 +1,5 @@
 # mixing array/hash
 services:
-	- Mailer
-	articles: ArticlesControl
-	- SuperMailer
+  - Mailer
+  articles: ArticlesControl
+    - SuperMailer

@@ -4,12 +4,14 @@ import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ArrayUtil;
-import lv.kid.vermut.intellij.yaml.psi.NeonKey;
-import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lv.kid.vermut.intellij.yaml.psi.NeonKey;
+import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
 
 /**
  * Created by Vermut on 16/05/2015.

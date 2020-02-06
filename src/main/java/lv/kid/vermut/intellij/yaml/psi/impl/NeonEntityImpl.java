@@ -4,11 +4,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.IncorrectOperationException;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+
 import lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes;
 import lv.kid.vermut.intellij.yaml.psi.NeonArray;
 import lv.kid.vermut.intellij.yaml.psi.NeonEntity;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -33,9 +35,12 @@ public class NeonEntityImpl extends NeonPsiElementImpl implements NeonEntity {
 
     @Override
     public NeonArray getArgs() {
-        ASTNode children[] = getNode().getChildren(TokenSet.create(NeonTokenTypes.NEON_LITERAL));
-        if (children.length > 0) return (NeonArray) children[0].getPsi(); // should be hash I guess
-        else return null;
+        ASTNode[] children = getNode().getChildren(TokenSet.create(NeonTokenTypes.NEON_LITERAL));
+        if (children.length > 0) {
+            return (NeonArray) children[0].getPsi(); // should be hash I guess
+        } else {
+            return null;
+        }
     }
 
     @Override

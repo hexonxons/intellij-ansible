@@ -3,8 +3,10 @@ package lv.kid.vermut.intellij.yaml.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import lv.kid.vermut.intellij.yaml.psi.NeonReference;
+
 import org.jetbrains.annotations.NotNull;
+
+import lv.kid.vermut.intellij.yaml.psi.NeonReference;
 
 /**
  * Created by Pavels.Veretennikovs on 2015.05.20..

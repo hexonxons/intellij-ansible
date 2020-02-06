@@ -2,8 +2,7 @@ package lv.kid.vermut.intellij.yaml.reference;
 
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.psi.PsiElement;
-import lv.kid.vermut.intellij.yaml.psi.NeonKey;
-import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -12,6 +11,9 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Scanner;
 
+import lv.kid.vermut.intellij.yaml.psi.NeonKey;
+import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
+
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static lv.kid.vermut.intellij.yaml.reference.AnsibleReferenceContributor.jinjaRefPattern;
 
@@ -19,6 +21,7 @@ import static lv.kid.vermut.intellij.yaml.reference.AnsibleReferenceContributor.
  * Created by Pavels.Veretennikovs on 2015.05.22..
  */
 public class AnsibleVariableValuesDocumentationProvider extends AbstractDocumentationProvider {
+    @Override
     @Nullable
     public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
         if (jinjaRefPattern().accepts(originalElement)) {

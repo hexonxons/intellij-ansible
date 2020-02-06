@@ -5,12 +5,14 @@ import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import lv.kid.vermut.intellij.yaml.lexer.NeonLexer;
 import lv.kid.vermut.intellij.yaml.lexer.NeonTokenTypes;
 import lv.kid.vermut.intellij.yaml.psi.NeonKey;
 import lv.kid.vermut.intellij.yaml.psi.NeonKeyValPair;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by Pavels.Veretennikovs on 2015.05.20..

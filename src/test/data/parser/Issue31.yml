@@ -257,7 +257,7 @@ project-templates:
 
   - name: ansible-role-functional-jobs-centos7-nv
     check:
-        - 'gate-{name}-dsvm-ansible-functional-centos7-nv'
+      - 'gate-{name}-dsvm-ansible-functional-centos7-nv'
 
   - name: ansible-role-functional-jobs-trusty
     check:
@@ -267,7 +267,7 @@ project-templates:
 
   - name: ansible-role-functional-jobs-trusty-nv
     check:
-        - 'gate-{name}-ansible-func-ubuntu-trusty-nv'
+      - 'gate-{name}-ansible-func-ubuntu-trusty-nv'
 
   - name: bindep-fallback
     check:
@@ -480,10 +480,10 @@ project-templates:
           - '{name}-pypi-wheel-upload'
     release:
       - '{name}-tarball':
-        - '{name}-pypi-both-upload':
-            - wheel-build-ubuntu-trusty-amd64:
-              - wheel-release-trustyx64
-            - '{name}-announce-release'
+          - '{name}-pypi-both-upload':
+              - wheel-build-ubuntu-trusty-amd64:
+                  - wheel-release-trustyx64
+              - '{name}-announce-release'
 
   # Release OpenStack Server packages.
   - name: openstack-server-release-jobs
@@ -491,7 +491,7 @@ project-templates:
       - '{name}-tarball'
     release:
       - '{name}-tarball':
-        - '{name}-announce-release'
+          - '{name}-announce-release'
       - '{name}-merge-release-tags'
 
   - name: release-notes-jobs
@@ -689,7 +689,7 @@ project-templates:
   - name: publish-to-npm
     release:
       - '{name}-npm-publish-tarball':
-        - '{name}-npm-upload'
+          - '{name}-npm-upload'
 
   - name: windmill-jobs-centos7
     check:
@@ -1347,7 +1347,7 @@ jobs:
   - name: ^gate-functional-dsvm-astara.*$
     branch: ^(?!stable/(?:juno|kilo)).*$
 
-# For Gerrit ver 2.8.x and later (using buck)
+  # For Gerrit ver 2.8.x and later (using buck)
   - name: ^.*gerrit.*buck$
     branch: ^openstack/(?!2\.4).*$
 
@@ -2956,7 +2956,7 @@ projects:
     post:
       - static-governance-publish
 
-#TODO: add docs
+  #TODO: add docs
   - name: openstack/group-based-policy
     template:
       - name: merge-check
@@ -4918,7 +4918,7 @@ projects:
       - os-cloud-config-docs
       - os-cloud-config-coverage
 
-#TODO: add docs
+  #TODO: add docs
   - name: openstack/os-collect-config
     template:
       - name: merge-check
@@ -4941,7 +4941,7 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
-#TODO: add docs
+  #TODO: add docs
   - name: openstack/os-net-config
     template:
       - name: merge-check
@@ -4966,7 +4966,7 @@ projects:
       - name: python-jobs
       - name: python3-jobs
 
-#TODO: add docs
+  #TODO: add docs
   - name: openstack/os-refresh-config
     template:
       - name: merge-check
@@ -6176,7 +6176,7 @@ projects:
     post:
       - python-gnocchiclient-coverage
 
-#TODO: add docs
+  #TODO: add docs
   - name: openstack/python-group-based-policy-client
     template:
       - name: merge-check
@@ -6215,15 +6215,15 @@ projects:
       - name: release-notes-jobs
       - name: osc-plugin-jobs
     check:
-        - gate-python-ironic-inspector-client-pep8
-        - gate-python-ironic-inspector-client-python27
-        - gate-python-ironic-inspector-client-tox-func
-        - gate-python-ironic-inspector-client-dsvm
+      - gate-python-ironic-inspector-client-pep8
+      - gate-python-ironic-inspector-client-python27
+      - gate-python-ironic-inspector-client-tox-func
+      - gate-python-ironic-inspector-client-dsvm
     gate:
-        - gate-python-ironic-inspector-client-pep8
-        - gate-python-ironic-inspector-client-python27
-        - gate-python-ironic-inspector-client-tox-func
-        - gate-python-ironic-inspector-client-dsvm
+      - gate-python-ironic-inspector-client-pep8
+      - gate-python-ironic-inspector-client-python27
+      - gate-python-ironic-inspector-client-tox-func
+      - gate-python-ironic-inspector-client-dsvm
 
   - name: openstack/python-ironicclient
     template:
@@ -6802,11 +6802,11 @@ projects:
 
   - name: openstack/reno
     template:
-    - name: merge-check
-    - name: python-jobs
-    - name: python3-jobs
-    - name: openstack-server-publish-jobs
-    - name: publish-to-pypi
+      - name: merge-check
+      - name: python-jobs
+      - name: python3-jobs
+      - name: openstack-server-publish-jobs
+      - name: publish-to-pypi
 
   - name: openstack/requests-mock
     template:
@@ -6854,7 +6854,7 @@ projects:
     periodic:
       - propose-requirements-constraints-master
       - wheel-build-ubuntu-trusty-amd64:
-        - wheel-release-trustyx64
+          - wheel-release-trustyx64
     post:
       - propose-requirements-updates
 
@@ -6871,7 +6871,7 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
-# TODO: add docs
+  # TODO: add docs
   - name: openstack/sahara
     template:
       - name: merge-check
@@ -6929,7 +6929,7 @@ projects:
       - sahara-dashboard-branch-tarball
       - sahara-dashboard-coverage
 
-# TODO: add docs
+  # TODO: add docs
   - name: openstack/sahara-extra
     template:
       - name: merge-check
@@ -6946,7 +6946,7 @@ projects:
     release:
       - sahara-extra-tarball
 
-# TODO: add docs
+  # TODO: add docs
   - name: openstack/sahara-image-elements
     template:
       - name: merge-check
@@ -7241,7 +7241,7 @@ projects:
       - stackalytics-tarball
     release:
       - stackalytics-tarball:
-        - stackalytics-pypi-both-upload
+          - stackalytics-pypi-both-upload
 
   - name: openstack/stacktach
     template:
@@ -7368,7 +7368,7 @@ projects:
     post:
       - steth-branch-tarball
 
-#TODO: add docs
+  #TODO: add docs
   - name: openstack/stevedore
     template:
       - name: merge-check
@@ -7552,12 +7552,12 @@ projects:
       - name: check-requirements
       - name: publish-to-pypi
     check:
-        - gate-tacker-horizon-pep8
-        - gate-tacker-horizon-python27
-        - gate-tacker-horizon-python34
+      - gate-tacker-horizon-pep8
+      - gate-tacker-horizon-python27
+      - gate-tacker-horizon-python34
     gate:
-        - gate-tacker-horizon-pep8
-        - gate-tacker-horizon-python27
+      - gate-tacker-horizon-pep8
+      - gate-tacker-horizon-python27
 
   - name: openstack/tacker-specs
     template:

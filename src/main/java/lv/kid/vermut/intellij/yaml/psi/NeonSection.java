@@ -6,8 +6,9 @@ import com.intellij.psi.PsiNamedElement;
  * Section is a special type of key-val pair - in first indention level
  * TODO: for future version
  */
-public interface NeonSection extends NeonKeyValPair, PsiNamedElement {
-	// for section inheritance
+public interface NeonSection extends NeonKeyValPair {
+    // for section inheritance
     NeonKey getParentSection();
-	String getParentSectionText();
+
+    String getParentSectionText();
 }

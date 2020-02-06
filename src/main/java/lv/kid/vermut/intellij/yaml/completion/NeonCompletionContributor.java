@@ -1,15 +1,21 @@
 package lv.kid.vermut.intellij.yaml.completion;
 
-import com.intellij.codeInsight.completion.*;
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionProvider;
+import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.patterns.StandardPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import lv.kid.vermut.intellij.yaml.reference.AnsibleReferenceContributor;
-import lv.kid.vermut.intellij.yaml.reference.AnsibleUtil;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import lv.kid.vermut.intellij.yaml.reference.AnsibleReferenceContributor;
+import lv.kid.vermut.intellij.yaml.reference.AnsibleUtil;
 
 /**
  * Provides code completion
@@ -31,6 +37,5 @@ public class NeonCompletionContributor extends CompletionContributor {
                         }
                     }
                 });
-
     }
 }

@@ -12,7 +12,7 @@ import lv.kid.vermut.intellij.yaml.YamlLanguage;
 
 public class YamlFileType extends LanguageFileType {
     public static final YamlFileType INSTANCE = new YamlFileType();
-    public static final String DEFAULT_EXTENSION = "yml";
+    public static final String DEFAULT_EXTENSION = "yaml";
     public static final String EXTENSIONS = "yml;yaml";
 
     protected YamlFileType() {

@@ -42,7 +42,7 @@
                                       implementationClass="lv.kid.vermut.intellij.yaml.editor.NeonStructureViewFactory" />
 
         <!-- code settings (indent, tabs?) -->
-        <codeStyleSettingsProvider implementation="org.jetbrains.yaml.YAMLCodeStyleSettingsProvider" />
+        <codeStyleSettingsProvider implementation="lv.kid.vermut.intellij.yaml.extension.AnsibleCodeStyleSettingsProvider" />
         <langCodeStyleSettingsProvider implementation="org.jetbrains.yaml.YAMLLanguageCodeStyleSettingsProvider" />
 
         <lang.parserDefinition language="yamlEx"

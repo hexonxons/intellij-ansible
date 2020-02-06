@@ -33,16 +33,20 @@
     <!-- IDEA extensions -->
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="Yaml file" implementationClass="lv.kid.vermut.intellij.yaml.file.YamlFileType"
-                  fieldName="INSTANCE" language="yamlEx" extensions="yaml" />
+                  fieldName="YML" language="yamlEx" extensions="yml;yaml" />
         <colorSettingsPage implementation="lv.kid.vermut.intellij.yaml.editor.NeonColorsPage" />
         <lang.syntaxHighlighterFactory language="yamlEx"
                                        implementationClass="lv.kid.vermut.intellij.yaml.editor.NeonSyntaxHighlighterFactory" />
+        <!-- Comment hotkey impl -->
         <lang.commenter language="yamlEx" implementationClass="org.jetbrains.yaml.YAMLCommenter" />
+
         <lang.psiStructureViewFactory language="yamlEx"
                                       implementationClass="lv.kid.vermut.intellij.yaml.editor.NeonStructureViewFactory" />
 
-        <!-- code settings (indent, tabs?) -->
-        <codeStyleSettingsProvider implementation="lv.kid.vermut.intellij.yaml.extension.AnsibleCodeStyleSettingsProvider" />
+        <!-- Codestyle settings -->
+        <codeStyleSettingsProvider
+            implementation="lv.kid.vermut.intellij.yaml.extension.AnsibleCodeStyleSettingsProvider" />
+
         <langCodeStyleSettingsProvider implementation="org.jetbrains.yaml.YAMLLanguageCodeStyleSettingsProvider" />
 
         <lang.parserDefinition language="yamlEx"

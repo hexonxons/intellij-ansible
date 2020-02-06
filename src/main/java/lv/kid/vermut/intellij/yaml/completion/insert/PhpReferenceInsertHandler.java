@@ -4,6 +4,8 @@ import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.psi.PsiDocumentManager;
+
+import org.jetbrains.annotations.NotNull;
 // import com.jetbrains.php.lang.psi.elements.PhpClass;
 
 /**
@@ -17,7 +19,7 @@ public class PhpReferenceInsertHandler implements InsertHandler<LookupElement> {
     }
 
     @Override
-    public void handleInsert(InsertionContext context, LookupElement lookupElement) {
+    public void handleInsert(@NotNull InsertionContext context, LookupElement lookupElement) {
         Object object = lookupElement.getObject();
         String classNamespace;
 

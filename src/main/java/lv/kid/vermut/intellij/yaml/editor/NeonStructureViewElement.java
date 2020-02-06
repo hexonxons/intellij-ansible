@@ -57,7 +57,7 @@ public class NeonStructureViewElement extends PsiTreeElementBase<PsiElement> {
 
     @Nullable
     @Override
-    public Icon getIcon(boolean unused) {
+    public Icon getIcon(boolean open) {
         return YamlIcons.FILETYPE_ICON;
     }
 

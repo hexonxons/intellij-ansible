@@ -20,25 +20,25 @@ public class YamlFileType extends LanguageFileType {
     }
 
     @Override
-	@NotNull
+    @NotNull
     public String getName() {
         return Yaml.LANGUAGE_NAME;
     }
 
     @Override
-	@NotNull
+    @NotNull
     public String getDescription() {
         return Yaml.LANGUAGE_DESCRIPTION;
     }
 
     @Override
-	@NotNull
+    @NotNull
     public String getDefaultExtension() {
         return DEFAULT_EXTENSION;
     }
 
     @Override
-	@NotNull
+    @NotNull
     public Icon getIcon() {
         return YamlIcons.FILETYPE_ICON;
     }

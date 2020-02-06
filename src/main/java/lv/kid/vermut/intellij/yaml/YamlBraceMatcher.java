@@ -20,18 +20,19 @@ public class YamlBraceMatcher implements PairedBraceMatcher, NeonTokenTypes {
             new BracePair(NEON_LBRACE_SQUARE, NEON_RBRACE_SQUARE, true), // []
     };
 
+    @NotNull
     @Override
     public BracePair[] getPairs() {
         return PAIRS;
     }
 
     @Override
-    public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType iElementType, @Nullable IElementType iElementType1) {
+    public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType) {
         return true;
     }
 
     @Override
-    public int getCodeConstructStart(PsiFile psiFile, int openingBraceOffset) {
+    public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
         return openingBraceOffset;
     }
 }

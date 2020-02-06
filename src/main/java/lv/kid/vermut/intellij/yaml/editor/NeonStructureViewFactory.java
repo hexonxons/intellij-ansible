@@ -17,8 +17,8 @@ import lv.kid.vermut.intellij.yaml.psi.NeonFile;
  */
 public class NeonStructureViewFactory implements PsiStructureViewFactory {
     @Override
-    public StructureViewBuilder getStructureViewBuilder(PsiFile file) {
-        if (!(file instanceof NeonFile)) {
+    public StructureViewBuilder getStructureViewBuilder(@NotNull PsiFile psiFile) {
+        if (!(psiFile instanceof NeonFile)) {
             return null;
         }
 
@@ -26,12 +26,12 @@ public class NeonStructureViewFactory implements PsiStructureViewFactory {
             @NotNull
             @Override
             public StructureViewModel createStructureViewModel(Editor editor) {
-                return new StructureViewModelBase(file, new NeonStructureViewElement(file));
+                return new StructureViewModelBase(psiFile, new NeonStructureViewElement(psiFile));
             }
 
             @NotNull
             public StructureViewModel createStructureViewModel() {
-                return new StructureViewModelBase(file, new NeonStructureViewElement(file));
+                return new StructureViewModelBase(psiFile, new NeonStructureViewElement(psiFile));
                 //				return new NeonStructureViewModel(file);
             }
         };

@@ -30,7 +30,7 @@ public class NeonCompletionContributor extends CompletionContributor {
                 AnsibleReferenceContributor.roleRefPattern(),
                 new CompletionProvider<CompletionParameters>() {
                     @Override
-                    protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+                    protected void addCompletions(@NotNull CompletionParameters parameters, @NotNull ProcessingContext context, @NotNull CompletionResultSet result) {
                         List<String> names = AnsibleUtil.findRoleNames(parameters.getPosition().getProject(), AnsibleUtil.ALL);
                         for (String name : names) {
                             result.addElement(LookupElementBuilder.create(name));

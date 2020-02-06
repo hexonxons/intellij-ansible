@@ -24,8 +24,7 @@ import lv.kid.vermut.intellij.yaml.parser.NeonElementTypes;
 public class NeonFoldingBuilder implements FoldingBuilder, NeonTokenTypes {
     private static final TokenSet COMPOUND_VALUE = TokenSet.create(
             NeonElementTypes.COMPOUND_VALUE,
-            NeonElementTypes.HASH
-                                                                  );
+            NeonElementTypes.HASH);
 
     private static void collectDescriptors(@NotNull ASTNode node, @NotNull List<FoldingDescriptor> descriptors) {
         IElementType type = node.getElementType();
@@ -49,9 +48,9 @@ public class NeonFoldingBuilder implements FoldingBuilder, NeonTokenTypes {
 
     @Override
     @NotNull
-    public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode astNode, @NotNull Document document) {
+    public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document) {
         List descriptors = new LinkedList();
-        collectDescriptors(astNode, descriptors);
+        collectDescriptors(node, descriptors);
         return (FoldingDescriptor[]) descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
     }
 

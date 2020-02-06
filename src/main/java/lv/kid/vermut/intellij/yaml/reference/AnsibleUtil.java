@@ -24,7 +24,7 @@ import lv.kid.vermut.intellij.yaml.psi.NeonValue;
 /**
  * Created by Vermut on 16/05/2015.
  */
-public class AnsibleUtil {
+public final class AnsibleUtil {
     public static final String ALL = ".*";
 
     public static List<String> findRoleNames(Project project, String key) {

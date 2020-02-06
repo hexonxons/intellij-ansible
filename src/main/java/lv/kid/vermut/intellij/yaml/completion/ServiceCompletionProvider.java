@@ -34,18 +34,14 @@ public class ServiceCompletionProvider extends CompletionProvider<CompletionPara
     // current element
     PsiElement curr;
 
-    public ServiceCompletionProvider() {
-        super();
-    }
-
     @Override
     protected void addCompletions(@NotNull CompletionParameters params,
-            ProcessingContext ctx,
-            @NotNull CompletionResultSet results) {
+            @NotNull ProcessingContext context,
+            @NotNull CompletionResultSet result) {
         curr = params.getPosition().getOriginalElement();
         if (curr.getParent() instanceof NeonReference) {
             for (String service : getAvailableServices()) {
-                results.addElement(LookupElementBuilder.create(service));
+                result.addElement(LookupElementBuilder.create(service));
             }
         }
     }

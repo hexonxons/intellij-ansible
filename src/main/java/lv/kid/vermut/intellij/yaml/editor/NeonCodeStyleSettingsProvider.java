@@ -24,8 +24,8 @@ public class NeonCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
 
     @NotNull
     @Override
-    public Configurable createSettingsPage(CodeStyleSettings settings, CodeStyleSettings originalSetting) {
-        return new CodeStyleAbstractConfigurable(settings, originalSetting, getConfigurableDisplayName()) {
+    public Configurable createSettingsPage(CodeStyleSettings settings, CodeStyleSettings modelSettings) {
+        return new CodeStyleAbstractConfigurable(settings, modelSettings, getConfigurableDisplayName()) {
             @Nullable
             @Override
             public String getHelpTopic() {

@@ -20,15 +20,10 @@ import com.jetbrains.php.lang.psi.elements.PhpNamedElement;
  * Complete class names
  */
 public class ClassCompletionProvider extends CompletionProvider<CompletionParameters> {
-
-    public ClassCompletionProvider() {
-        super();
-    }
-
     @Override
     protected void addCompletions(@NotNull CompletionParameters params,
-            ProcessingContext ctx,
-            @NotNull CompletionResultSet results) {
+            @NotNull ProcessingContext context,
+            @NotNull CompletionResultSet result) {
 	/*	Collection<PhpNamedElement> variants = new THashSet<PhpNamedElement>();
 
 		PsiElement curr = params.getPosition().getOriginalElement();

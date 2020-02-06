@@ -24,12 +24,14 @@ public class NeonParser implements PsiParser, NeonTokenTypes, NeonElementTypes {
     private int myInline;
     private final Stack<IElementType> expectedClosings = new Stack<IElementType>();
     private IndentType myIndentType;
+
     private enum IndentType {TABS, SPACES}
+
     private enum QuotesType {NONE, SINGLE, DOUBLE}
 
     @NotNull
     @Override
-    public ASTNode parse(IElementType root, PsiBuilder builder) {
+    public ASTNode parse(@NotNull IElementType root, PsiBuilder builder) {
         builder.setDebugMode(true);
 
         myBuilder = builder;

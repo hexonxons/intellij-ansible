@@ -6,9 +6,12 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.FileViewProviderFactory;
 import com.intellij.psi.PsiManager;
 
+import org.jetbrains.annotations.NotNull;
+
 public class YamlFileViewProviderFactory implements FileViewProviderFactory {
+    @NotNull
     @Override
-    public FileViewProvider createFileViewProvider(VirtualFile virtualFile, Language language, PsiManager psiManager, boolean physical) {
-        return new YamlFileViewProvider(psiManager, virtualFile, physical);
+    public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled) {
+        return new YamlFileViewProvider(manager, file, eventSystemEnabled);
     }
 }

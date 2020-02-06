@@ -37,9 +37,9 @@ public class AnsibleNamesContributor implements ChooseByNameContributor {
 
     @NotNull
     @Override
-    public NavigationItem[] getItemsByName(String key, String pattern, Project project, boolean includeNonProjectItems) {
-        List<NeonValue> names = AnsibleUtil.findNames(project, key);
-        List<PsiFile> roles = AnsibleUtil.findRoles(project, key);
+    public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
+        List<NeonValue> names = AnsibleUtil.findNames(project, name);
+        List<PsiFile> roles = AnsibleUtil.findRoles(project, name);
 
         List<NavigationItem> result = new ArrayList<NavigationItem>(names.size() + roles.size());
         result.addAll(roles);

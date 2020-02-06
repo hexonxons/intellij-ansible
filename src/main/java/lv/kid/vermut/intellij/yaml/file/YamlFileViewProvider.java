@@ -16,16 +16,16 @@ public class YamlFileViewProvider extends SingleRootFileViewProvider {
         super(psiManager, virtualFile);
     }
 
-    public YamlFileViewProvider(@NotNull PsiManager psiManager, @NotNull VirtualFile virtualFile, boolean b) {
-        super(psiManager, virtualFile, b);
+    public YamlFileViewProvider(@NotNull PsiManager psiManager, @NotNull VirtualFile virtualFile, boolean eventSystemEnabled) {
+        super(psiManager, virtualFile, eventSystemEnabled);
     }
 
-    public YamlFileViewProvider(@NotNull PsiManager psiManager, @NotNull VirtualFile virtualFile, boolean b, @NotNull Language language) {
-        super(psiManager, virtualFile, b, language);
+    public YamlFileViewProvider(@NotNull PsiManager psiManager, @NotNull VirtualFile virtualFile, boolean eventSystemEnabled, @NotNull Language language) {
+        super(psiManager, virtualFile, eventSystemEnabled, language);
     }
 
     @Override
-    public boolean supportsIncrementalReparse(@NotNull Language language) {
+    public boolean supportsIncrementalReparse(@NotNull Language rootLanguage) {
         return false;
     }
 }
